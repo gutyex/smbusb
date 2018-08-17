@@ -219,10 +219,14 @@ int main(int argc, char **argv)
 			for(i=start;i<=end;i++) {
 				if (skipMap[i] != 0xFF) {
 					status = SMBTestCommandWrite(address,i);
-					if (status< 0) {
+					if (status<0) {
 						 printf("[%x] ERROR: %d\n",i,status);
-					} else {					
-		                        	if (status>0) { 
+					} else {
+						if (status==0) { 
+							didAck=1;
+							printf("[%x] NO ACK",i);
+						}
+		                if (status>0) { 
 							didAck=1;
 							printf("[%x] ACK",i);
 						}

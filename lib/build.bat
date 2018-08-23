@@ -4,3 +4,4 @@ if %ERRORLEVEL% GTR 0 (
 	echo Error building library
 	exit 1
 )
+echo Built lib

@@ -1,5 +1,7 @@
 @echo off
 
+cd /d %~dp0
+
 where /q gcc.exe
 if ERRORLEVEL 1 (
 	echo gcc not found in path. Please install TDM-GCC: http://tdm-gcc.tdragon.net/download
@@ -33,17 +35,24 @@ if not exist libusb (
 
 	cd lib
 	build.bat
+	
+	echo Returned to main
 
 	echo Building tools
 	cd ..\tools
 	build.bat
+	
+	echo Returned to main
 
 	cd..
 
-	mkdir RELEASE_WIN
+	mkdir RELEASE_WIN >nul 2>&1
+	
+	del RELEASE_WIN\* /Q
+	
+	move /y lib\libsmbusb.dll RELEASE_WIN\ >nul
 	copy /y libusb\libusb-1.0.dll RELEASE_WIN\ >nul
-	copy /y lib\libsmbusb.dll RELEASE_WIN\ >nul
-	copy /y tools\*.exe RELEASE_WIN\ >nul
+	move /y tools\*.exe RELEASE_WIN\ >nul
 	
 	echo Done.
 )

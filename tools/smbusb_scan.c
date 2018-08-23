@@ -224,7 +224,7 @@ int main(int argc, char **argv)
 					} else {
 						if (status==0) { 
 							didAck=1;
-							printf("[%x] NO ACK",i);
+							printf("[%x]",i);
 						}
 		                if (status>0) { 
 							didAck=1;
